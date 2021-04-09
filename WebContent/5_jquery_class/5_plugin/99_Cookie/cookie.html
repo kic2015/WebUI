@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>jquery.cookie</title>
+<script type="text/javascript"   src="http://code.jquery.com/jquery-1.9.0.js"></script>
+<script type="text/javascript"   src="js/jquery.cookie.js"></script>
+<script type="text/javascript">
+	/* 쿠키 :  클라이언트에 저장하는것
+			-보안에 취약
+			-문자열만 저장
+			-저장용량 소량
+	 */
+	//송신버튼이 눌려졌을때
+	$(function(){
+		$('#txtMail').val($.cookie('email'))
+		
+		$('#btnSave').click(function(){
+			var msg = $('#txtMail').val();//txtMail의 값을 msg변수에 담는다
+			$.cookie('email',msg+'java',{expires:1});//제이쿼리 쿠키 단위는 1(하루)다. 여러개를 쓰려고 객체형식({})
+			$('#txtMail').val('');
+			$('body').css('backgroundColor','blue')
+			//쿠키값을 얻어올때는 쿠키라는 함수에 내가 지정한 이름을 얻어오면 내가 넣어놨던 값을 얻어온다
+		});		
+	})
+	
+</script>
+</head>
+<body>
+<form method="POST" action="">
+  메일 어드레스：
+  <input id="txtMail" type="email" size="50" />
+  <input id="btnSave" type="button" value="송신" />
+</form>
+</body>
+</html>

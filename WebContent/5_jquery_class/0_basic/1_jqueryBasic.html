@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title> 첫 연습 </title>
+	<style type="text/css">
+		#here{
+			position:absolute;
+			left:0;
+			top:0;
+		}
+	</style>
+	<script src="../lib/jquery-3.6.0.js"></script>
+	<script>
+	/* 변수 선언
+	예전에는 var
+	ES 5,6버전에서는 let, const */
+
+	$(function(){
+		/* $('div#here').click(function(){
+		$('#here').text('클릭하면 here 태그 내용변경 ')
+		})
+		
+		let h= $('#here');
+		h.click(function(){
+			h.text('클릭하면 내용 변경');
+		})
+		
+		//마우스가 올려졌을때
+		h.mouseenter(function(){
+			h.css('border','2px solid #FF8800');
+		})
+		//마우스가 나갔을때
+		h.mouseleave(function(){
+			h.css('border','2px dotted green');
+		})
+		//hover : 마우스가 올라갔다+내려오는 이벤트(mouseenter+mouseleave)
+		h.hover(function(){
+			h.text('마우스 올라감')
+		},function(){
+			h.text('마우스 나감')			
+		}) */
+		
+		//효과함수
+/* 		$('#here').fadeOut(3000); //점점 사라지는 효과
+		$('#here').fadeIn(3000); //반대로 점점 나타나는 효과 */
+		
+		$('#here').slideUp(1000);//슬라이드가 올라가는거처럼 나타나면서 글씨가 사라짐 
+		$('#here').slideDown(1000);//슬라이드가 내려가처럼 효과주면서 글씨가 다시나타남
+		
+		$('#here').animate({ //2개이상의 속성을 줄때는 객체형식으로 부여해줘야한다
+			'left':400,
+			'top':200});
+		
+		
+	}) 
+	</script>
+</head>
+<body>
+	
+
+	<div id="here">
+	아자아자 제이쿼리~~!!! 
+	</div>
+	
+	
+	<div id="student">
+		<div id="name">홍길동</div>
+		<div id="age">34</div>
+	</div>
+
+
+	
+</body>
+</html>

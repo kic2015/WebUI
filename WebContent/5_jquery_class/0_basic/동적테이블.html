@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 항목은 텍스트, 크기는 라디오버튼 ,색상 선택 리스트
+	추가버튼
+ -->
+<script src="../lib/jquery-3.6.0.js"></script>
+   <script>
+       $(function() {
+            $("#insert").click(function(){
+				var	content=$("#content").val()
+				var radio =	$('input[name="size"]:checked').val()
+				var color = $("#color>option:selected").text()				
+
+//				$('#tbl').append('<tr><td>dd</td><td>ss</td><td>sss</td></tr>');
+				//td 요소를 만드는 테이블 붙이기
+				var tbl =$('#tbl');
+				var tr = $('<td/>');
+				//tr에 td 3개 붙이기
+				//td에 위 입력(선택)값을 지정하기
+				//태그와 태그사이의 요소를 가져올때는 text
+				//태그의 값을 가져올때는 val
+				//attr, prop 차이 알아보기
+				$("#tbl").append("<tr><td>"+content+"</td><td>"+radio+"</td><td>"+color+"</td></tr>");
+
+            })
+        })
+   </script>
+</head>
+<body>
+항목 : <input id="content" type="text" size="20" /><br/>
+
+크기 : <input type="radio" name="size" value="large">
+	 <label for="large">대</label>
+	 <input type="radio" name="size" value="middle">
+     <label for="middle">중</label>
+	 <input type="radio" name="size" value="small">
+     <label for="small">소</label>
+	 <br/>
+	 
+색상 : <select id="color">
+			<option value="red">빨강</option>
+			<option value="blue">블루</option>
+			<option value="green">초록</option>
+			<option value="yellow">노랑색</option>
+	 </select><br/>
+<input type='button' id='insert' value='추가'/>	 
+<table border='1' id="tbl">
+<tr><td>항목</td><td>크기</td><td>색상</td></tr>
+</table>
+<!--해당하는 값들 추출
+	추가 버튼 클릭 이벤트 만들기
+	추가버튼이 작동이 되는지 확인 -alert띄워보기
+	해당 alert에 항목값들을 집어넣고 확인하기
+	추가 버튼눌럿을때 해당항목 띄워보기
+	추가 버튼 눌렀을때 해당하는 값들 추가로 넣기 
+   -->
+</body>
+</html>

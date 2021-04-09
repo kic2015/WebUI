@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- jQuery라이브러리를 임포트 -->
+  <script type="text/javascript"  src="http://code.jquery.com/jquery-1.9.0.js"></script>
+
+  <!-- jstorage라이브러리를 임포트 -->
+  <script type="text/javascript" src="js/jstorage.min.js"></script>
+
+  <script type="text/javascript">
+$(function(){
+	//저장된 내용을 가져와서 화면에 출력
+	$('#name').val($.jStorage.get('jsname'));//jsorage에 저장된 값을 get을 통해 가져와서 name이라는 id의 input박스에 값을 넣어서 화면에 보여준다
+	$('#memo').val($.jStorage.get('jsmemo'));//jsorage에 저장된 값을 get을 통해 가져와서 memo이라는 id의 input박스에 값을 넣어서 화면에 보여준다
+
+	$('#set').click(function(){
+		$.jStorage.set('jsname',$('#name').val());//이름의 입력값 얻어와서 jsname이라는 이름으로 jStorage에 담는다 
+		$('#name').val('')//초기화		
+		$.jStorage.set('jsmemo',$('#memo').val());//비고의 입력값 얻어오기 jsname이라는 이름으로 jStorage에 담는다 
+		$('#memo').val('')//초기화		
+	})
+	// 삭제버튼이 눌렸을때 jstorage 내용을 지우기(deleteKey())
+	$('#del').click(function(){
+		$.jStorage.deleteKey('jsname'); 
+		$.jStorage.deleteKey('jsmemo'); 
+	})
+})
+  </script>
+</head>
+<body>
+<form id="sample">
+  이름：<input id="name" /><br />
+  비고：<input id="memo" /><br /><br />
+  <button id="set">등록</button>
+  <button id="del">삭제</button>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8"/>
+	<title> 첫 연습 </title>
+<style type="text/css">
+	.active{
+		border : 4px solid red;
+	}
+</style>	
+<script src="/WebUI/5_jquery_class/lib/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+	$(function(){//자바스크립트 준비가 됐다는 뜻
+		$('.man').css({'background':'lightblue'})
+		
+		$('.woman').css({
+			'background':'pink',
+			'color':'red'
+		})
+		$('.inputText').focus(function(){
+			$(this).addClass('active')//포커스가 갔을때 클래스에 active클래스 추가(클래스 여러개 부여 가능)
+			//this는 선택한 포커스만 적용하고 싶다는뜻			
+		})
+
+		//포커스를 잃었을때
+		$('.inputText').blur(function(){
+			$(this).removeClass('active')
+			//this.removeClass('active')
+		})
+		
+		//태그 사이의 어떤값(글자) 지정하거나 얻어 오거나 값을 변경하고 싶을때
+		//-text()
+		//-html()
+		$('#divText').click(function(){
+				alert($('#divText').text());
+//				$('#divText').text('<img src="images/grim.jpg">')//text는 텍스트로 인식
+				$('#divText').html('<img src="images/grim.jpg">')//html은 요소로 인식
+				
+		})
+		$('#divEmpty').click(function(){
+//				$(this).empty();// 안에 요소를ㄴ 없애주는것
+				$(this).hide();//요소는 잇는데 display를 none시켜주는것(안보여주는것)
+		})
+		//람다를 쓰면 this와 화살표가 안먹힘
+		$('#changeGrim').click(function(){//클릭했을때 함수호출
+//			$(this).attr('src','images/cat.jpg')//태그의 속성을 변경
+	
+			//상대경로-> 절대경로로 바꾸기 ->WebContent는 특수폴더라 경로에서 생략, root가 슬래쉬 역할
+			$(this).attr('src','/WebUI/5_jquery_class/0_basic/images/cat.jpg')
+		})
+		//사용자의 입력값을 서버로 보낼때는 form태그로 묶어줘야한다
+		
+		//확인버튼이 눌러졌을때
+		$('#check').click(function(){
+			//자바스크립트에서 value가 jquery에서는 val
+			let message = '';
+			//사용자 입력값 얻어와서 message 변수에 추가
+			message +=$('#tf').val() +"\n";
+			message +=$('#ta').val() +"\n";
+			message +=$('#sel option:selected').text() +"\n";
+			message +=$('#sel_m option:selected').text() +"\n";
+			
+			alert(message)			
+		})
+		
+		//초기화 버튼이 눌러졌을때
+		$('#init').click(function(){
+			$('#tf').val("홍길동");	
+			$('#ta').val("내용을 입력하세요");	
+//			$('#ta').attr('placeholder','내용입력2번째');	단점 :기존에 값이 있거나 값을 작성하는중에 초기화버튼을 누르면 전혀 작동이안된다.
+			$('#sel').val('incheon');	
+			$('#sel_m').val(['seom2','seom3']);	//다중선택일경우 배열형태로 만들어서 선택해줘야한다
+		})
+		
+		$('#btn').click(function(){
+			let actor=$('#actor');
+			let tae=$('#tae');
+			let su=$('#su');
+			let bin=$('#bin');
+			
+			//동적태그 변경 : append() /appendTo() ->append를 선호
+/* 			actor.append(tae);
+			actor.append(su);
+			actor.append(bin); */
+			
+			tae.appendTo(actor);
+			su.appendTo(actor);
+			bin.appendTo(actor);
+			
+			
+			//***엄청중요함
+			//동적태그추가
+			actor.append('<div>한배우</div>');//1번방법
+			
+			var n = $('<div/>');//2번방법
+			n.text('두배우');
+			actor.append(n);
+						
+		})
+		//(6) 예문
+		$('.data').each(function(){//data 클래스가 여러개니까 data 각각 하나하나 적용시키고 싶을때는 each
+			$(this).click(function(){//this를 써서 하나하나 명확하게 정해주기
+//				alert($(this).text()); jquery버전
+//				alert(this.innerHTML); javascript 버전
+				alert(this.textContent);
+				
+			})
+		})
+
+		
+		
+
+	})
+</script>
+</head>
+
+<body>
+	<!--  1 -->
+	<ul>
+		<li class="man">김수현</li>
+		<li class="woman">김희애</li>
+		<li class="woman">송혜교</li>
+		<li class="man">하정우</li>
+		<li class="woman">김태희</li>
+	</ul>
+	<!-- 2 -->
+	<input type="text" class="inputText"/>
+	<input type="text" class="inputText"/>
+	<input type="text" class="inputText"/>
+	
+
+	<!-- 3 -->
+		<div id="divText">여기에 글씨를</div>
+		<div id="divHtml">여기에 그림을</div>
+		<div id="divEmpty">여기를 비움</div>
+		<p>
+		<img src="images/puppy.jpg" id='changeGrim'>
+		</p>
+		
+	<!-- 4 -->	
+		<p>
+		이름 : <input id="tf" type="text" size="20" /><br/>
+		메세지 : <textarea id="ta" rows="3" cols="20"></textarea><br/>
+		주소 : <select id="sel">
+			<option value="seoul">서울</option>	<!-- option에 value 값 없어도 됨 -->
+			<option value="busan">부산</option>
+			<option value="masan">마산</option>
+			<option value="incheon">인천</option>
+		</select>
+		<select id="sel_m" multiple="multiple">
+			<option value="seom1">제주도</option>
+			<option value="seom2">울릉도</option>
+			<option value="seom3">독도</option>
+			<option value="seom4">거제도</option>
+		</select><br/>
+		<input type='button' id='check' value='확인'/>
+		<input type='button' id='init' value='초기화'/> <!--  [과제] 클릭시 값 지정하려면  -->
+		<div id='result'></div>
+		</p>
+		
+	<!-- 5 -->
+		<div id="actor">배우</div>
+		<div id="tae">김태희</div>
+		<div id="su">김수현</div>
+		<div id="bin">현빈</div>
+		<button id='btn'>동적</button>
+		<!-- [ 과제 ] 동적 테이블 만들기  -->
+
+	<!-- 6 -->
+		<div class="data">이름</div>
+		<div class="data">직업</div>
+		<div class="data">나이</div>
+
+	
+</body>
+</html>
